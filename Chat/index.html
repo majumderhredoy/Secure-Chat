@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE - E2E Protected Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for professional typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-halved"></i>
+                <span>SECURE</span>
+            </div>
+
+            <div class="connection-manager">
+                <div class="my-id-container">
+                    <label>Your Identity ID</label>
+                    <div class="id-wrapper">
+                        <span id="my-peer-id">Connecting...</span>
+                        <div class="id-actions">
+                            <button id="copy-id-btn" title="Copy ID"><i class="far fa-copy"></i></button>
+                            <button id="share-link-btn" title="Share Invite Link"><i
+                                    class="fas fa-share-nodes"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="connect-form">
+                    <label>Connect to Partner</label>
+                    <input type="text" id="partner-id-input" placeholder="Enter partner's ID" spellcheck="false">
+                    <button id="connect-btn">Connect Peer</button>
+                </div>
+            </div>
+
+            <div class="security-status offline" id="connection-status">
+                <i class="fas fa-circle"></i>
+                <span id="status-label">Initializing...</span>
+            </div>
+        </aside>
+
+        <!-- Main Chat -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="partner-info">
+                    <div class="avatar"><i class="fas fa-user-lock"></i></div>
+                    <div class="name-status">
+                        <h2 id="partner-display-name">Secure Chat</h2>
+                        <span id="partner-status">Double-Ratchet Encrypted Session</span>
+                    </div>
+                </div>
+                <div class="call-actions">
+                    <button id="audio-call-btn" disabled title="Voice Call"><i class="fas fa-phone"></i></button>
+                    <button id="video-call-btn" disabled title="Video Call"><i class="fas fa-video"></i></button>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messages-container">
+                <div class="welcome-screen">
+                    <i class="fas fa-fingerprint splash-icon"></i>
+                    <h1>Private Connection</h1>
+                    <p>Both users must be online to establish a secure handshake. Once connected, your messages are
+                        encrypted locally before being sent.</p>
+                </div>
+            </div>
+
+            <footer class="chat-footer">
+                <div class="input-wrapper">
+                    <button id="media-btn" title="Add Image/Video"><i class="fas fa-plus"></i></button>
+                    <input type="file" id="file-input" hidden accept="image/*,video/*">
+                    <input type="text" id="message-input" placeholder="Type a secure message..." autocomplete="off">
+                    <button id="emoji-btn" title="Emojis"><i class="far fa-smile"></i></button>
+                    <button id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Call Overlay -->
+    <div class="call-overlay" id="call-overlay">
+        <div class="call-card">
+            <div class="call-avatar"><i class="fas fa-user-shield"></i></div>
+            <h2 id="call-partner-name">Partner Name</h2>
+            <p id="call-status">End-to-End Encrypted Call</p>
+
+            <div class="video-container" id="video-container" hidden>
+                <video id="remote-video" autoplay playsinline></video>
+                <video id="local-video" autoplay muted playsinline></video>
+            </div>
+
+            <div class="call-controls">
+                <button id="accept-call" class="btn-success"><i class="fas fa-phone"></i> Accept</button>
+                <button id="end-call" class="btn-danger"><i class="fas fa-phone-slash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
