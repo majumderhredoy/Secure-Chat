@@ -85,11 +85,6 @@ cd secure-chat
 
 ---
 
-## 📸 Screenshots
-
-_Add screenshots of your UI here (optional)_
-
----
 
 ## 🔐 Security Highlights
 
